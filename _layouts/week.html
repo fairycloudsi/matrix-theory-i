@@ -1,0 +1,70 @@
+---
+layout: default
+---
+{%- comment -%}
+  Week pages carry only `week: N` in their front matter. Everything else is
+  looked up from _data/schedule.yml, so the schedule table and these pages can
+  never drift apart -- edit the data file and both update.
+{%- endcomment -%}
+{%- assign wk = site.data.schedule | where: "week", page.week | first -%}
+
+<article>
+  <div class="week-head">
+    <span class="eyebrow">Week {{ wk.week }}</span>
+    <span class="badge">{{ wk.part }}</span>
+    {% if wk.flag %}<span class="badge badge--mark">{{ wk.flag }}</span>{% endif %}
+  </div>
+
+  <h1>{{ wk.topic }}</h1>
+
+  <div class="prose">
+    <p><strong>Reading:</strong> Golub &amp; Van Loan {{ wk.gvl }}{% if wk.pages %}, pp.&nbsp;{{ wk.pages }}{% endif %}.
+    {% if wk.extra %}{{ wk.extra }}{% endif %}</p>
+
+    {% if wk.objectives %}
+    <h2>By the end of this week you should be able to</h2>
+    <ul>
+      {% for o in wk.objectives %}<li>{{ o }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if wk.algorithms %}
+    <h2>Algorithms introduced</h2>
+    <ul>
+      {% for a in wk.algorithms %}<li>{{ a }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if wk.ai %}
+    <h2>Where this shows up in AI</h2>
+    <p>{{ wk.ai }}</p>
+    {% endif %}
+
+    <h2>Materials</h2>
+  </div>
+
+  <ul class="materials">
+    <li><strong>Slides</strong><br>
+      {% if wk.slides %}<a href="{{ wk.slides | relative_url }}">Download PDF</a>
+      {% else %}<span class="pending">posted before class</span>{% endif %}</li>
+    <li><strong>Notes</strong><br>
+      {% if wk.notes %}<a href="{{ wk.notes | relative_url }}">Lecture notes</a>
+      {% else %}<span class="pending">posted after class</span>{% endif %}</li>
+    <li><strong>Code</strong><br>
+      {% if wk.code %}<a href="{{ wk.code }}">Repository folder</a>
+      {% else %}<span class="pending">to be added</span>{% endif %}</li>
+    <li><strong>Due this week</strong><br>
+      {% if wk.due %}{{ wk.due }}{% else %}<span class="pending">nothing due</span>{% endif %}</li>
+  </ul>
+
+  {{ content }}
+
+  {%- assign prev_n = wk.week | minus: 1 -%}
+  {%- assign next_n = wk.week | plus: 1 -%}
+  {%- assign prev = site.data.schedule | where: "week", prev_n | first -%}
+  {%- assign next = site.data.schedule | where: "week", next_n | first -%}
+  <nav class="pager">
+    <span>{% if prev %}<a href="{{ '/weeks/week-' | append: prev.slug | append: '/' | relative_url }}">&larr; Week {{ prev.week }}: {{ prev.topic }}</a>{% endif %}</span>
+    <span>{% if next %}<a href="{{ '/weeks/week-' | append: next.slug | append: '/' | relative_url }}">Week {{ next.week }}: {{ next.topic }} &rarr;</a>{% endif %}</span>
+  </nav>
+</article>

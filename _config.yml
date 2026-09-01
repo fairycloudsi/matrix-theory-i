@@ -1,0 +1,60 @@
+# ---------------------------------------------------------------------------
+# Matrix Theory and Applications I -- course website
+#
+# GitHub Pages builds this natively: no plugins, no CI required.
+# Settings -> Pages -> Source: "Deploy from a branch" -> main / (root)
+#
+# IMPORTANT: `baseurl` must match your repository name. If you name the repo
+# something other than matrix-theory-i, change it here. For a user/org site
+# (username.github.io) set baseurl to "" instead.
+# ---------------------------------------------------------------------------
+
+title: "Matrix Theory and Applications I"
+tagline: "Matrix analysis, decompositions, and the computations behind modern AI"
+description: >-
+  Graduate course on matrix theory and matrix computations for students in
+  artificial intelligence and related disciplines. 16 weeks, 32 contact hours.
+
+baseurl: "/matrix-theory-i"
+url: ""
+
+# --- Course facts, surfaced across the site -------------------------------
+course:
+  code: "M571011S03"
+  hours: 32
+  weeks: 16
+  format: "16 weeks x 2 hours"
+  instructor: "TBA"
+  email: "tba@example.edu"
+  meeting: "TBA"
+  location: "TBA"
+  office_hours: "TBA"
+
+# --- Collections ----------------------------------------------------------
+collections:
+  weeks:
+    output: true
+    permalink: /weeks/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: "weeks"
+    values:
+      layout: "week"
+  - scope:
+      path: ""
+    values:
+      layout: "page"
+
+# --- Build ----------------------------------------------------------------
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

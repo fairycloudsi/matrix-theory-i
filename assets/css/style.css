@@ -1,0 +1,342 @@
+/* ---------------------------------------------------------------------------
+   Matrix Theory and Applications I -- site styles
+   One stylesheet, no framework, no build step. Light and dark.
+   --------------------------------------------------------------------------- */
+
+:root {
+  --bg:        #ffffff;
+  --bg-soft:   #f6f7f9;
+  --bg-sunken: #eceff3;
+  --fg:        #1a1d21;
+  --fg-muted:  #5b6470;
+  --fg-faint:  #858e9a;
+  --rule:      #dde1e7;
+  --accent:    #1f4e8c;
+  --accent-fg: #ffffff;
+  --accent-soft: #e8eef7;
+  --mark:      #b4531a;
+  --radius: 8px;
+  --measure: 74ch;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:        #14171b;
+    --bg-soft:   #1b1f25;
+    --bg-sunken: #21262e;
+    --fg:        #e6e9ed;
+    --fg-muted:  #a3adba;
+    --fg-faint:  #7d8794;
+    --rule:      #2c333c;
+    --accent:    #7aa8e0;
+    --accent-fg: #14171b;
+    --accent-soft: #1d2836;
+    --mark:      #e0975f;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Header and navigation ------------------------------------------------ */
+
+.site-header {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-bottom: 1px solid var(--rule);
+}
+
+.site-header__inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1.1rem 1.25rem 0.9rem;
+}
+
+.site-title {
+  display: block;
+  font-size: 1.28rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: var(--accent-fg);
+  text-decoration: none;
+}
+
+.site-tagline {
+  margin: 0.2rem 0 0;
+  font-size: 0.9rem;
+  opacity: 0.82;
+}
+
+.site-nav {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem;
+}
+
+.site-nav a {
+  display: inline-block;
+  padding: 0.55rem 0.85rem;
+  color: var(--accent-fg);
+  text-decoration: none;
+  font-size: 0.92rem;
+  opacity: 0.85;
+  border-bottom: 2px solid transparent;
+}
+
+.site-nav a:hover { opacity: 1; }
+.site-nav a.is-active {
+  opacity: 1;
+  font-weight: 600;
+  border-bottom-color: var(--accent-fg);
+}
+
+/* In dark mode the accent inverts to a light blue, which as a full-width
+   header band is uncomfortably bright. Use a recessed bar instead. */
+@media (prefers-color-scheme: dark) {
+  .site-header { background: var(--bg-soft); color: var(--fg); }
+  .site-title  { color: var(--fg); }
+  .site-nav a  { color: var(--fg-muted); }
+  .site-nav a:hover { color: var(--fg); }
+  .site-nav a.is-active { color: var(--accent); border-bottom-color: var(--accent); }
+}
+
+/* --- Layout --------------------------------------------------------------- */
+
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+.prose { max-width: var(--measure); }
+
+h1, h2, h3, h4 {
+  line-height: 1.25;
+  letter-spacing: -0.012em;
+  margin: 2rem 0 0.6rem;
+}
+
+h1 { font-size: 1.85rem; margin-top: 0.5rem; }
+h2 { font-size: 1.32rem; padding-top: 0.6rem; border-top: 1px solid var(--rule); }
+h3 { font-size: 1.06rem; color: var(--fg-muted); }
+
+p, ul, ol { margin: 0.7rem 0; }
+li { margin: 0.28rem 0; }
+
+a { color: var(--accent); text-underline-offset: 2px; }
+a:hover { text-decoration-thickness: 2px; }
+
+hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
+
+code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  background: var(--bg-sunken);
+  padding: 0.12em 0.36em;
+  border-radius: 4px;
+}
+
+pre {
+  background: var(--bg-sunken);
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius);
+  overflow-x: auto;
+}
+pre code { background: none; padding: 0; }
+
+blockquote {
+  margin: 1rem 0;
+  padding: 0.1rem 0 0.1rem 1rem;
+  border-left: 3px solid var(--accent);
+  color: var(--fg-muted);
+}
+
+/* --- Hero ----------------------------------------------------------------- */
+
+.hero {
+  background: var(--bg-soft);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.5rem;
+  margin-bottom: 1.6rem;
+}
+.hero p:first-child { margin-top: 0; }
+.hero p:last-child { margin-bottom: 0; }
+
+/* --- Fact grid ------------------------------------------------------------ */
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+  margin: 1.2rem 0 1.8rem;
+  padding: 0;
+  list-style: none;
+}
+
+.facts li {
+  background: var(--bg-soft);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 0.75rem 0.9rem;
+  margin: 0;
+}
+
+.facts .k {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--fg-faint);
+}
+
+.facts .v { font-weight: 600; }
+
+/* --- Cards ---------------------------------------------------------------- */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0.9rem;
+  margin: 1.2rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  display: block;
+  background: var(--bg-soft);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 0.95rem 1.1rem;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color .12s ease, transform .12s ease;
+}
+.card:hover { border-color: var(--accent); transform: translateY(-1px); }
+.card strong { display: block; color: var(--accent); margin-bottom: 0.2rem; }
+.card span { font-size: 0.9rem; color: var(--fg-muted); }
+
+/* --- Tables --------------------------------------------------------------- */
+
+.table-scroll { overflow-x: auto; margin: 1rem 0; }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.92rem;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.55rem 0.7rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+thead th {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--fg-faint);
+  border-bottom: 2px solid var(--rule);
+  white-space: nowrap;
+}
+
+tbody tr:hover { background: var(--bg-soft); }
+
+td.num, th.num { text-align: right; white-space: nowrap; }
+
+.part-row td {
+  background: var(--accent-soft);
+  font-weight: 650;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+
+/* --- Badges --------------------------------------------------------------- */
+
+.badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.12rem 0.45rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  white-space: nowrap;
+}
+.badge--mark { background: transparent; color: var(--mark); border: 1px solid var(--mark); }
+
+/* --- Week page ------------------------------------------------------------ */
+
+.week-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.2rem;
+}
+.week-head .eyebrow {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-faint);
+}
+
+.materials {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+  margin: 1rem 0;
+}
+.materials li {
+  border: 1px dashed var(--rule);
+  border-radius: var(--radius);
+  padding: 0.7rem 0.9rem;
+  margin: 0;
+  font-size: 0.9rem;
+}
+.materials .pending { color: var(--fg-faint); font-style: italic; }
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.92rem;
+}
+
+/* --- Footer --------------------------------------------------------------- */
+
+.site-footer {
+  border-top: 1px solid var(--rule);
+  background: var(--bg-soft);
+  color: var(--fg-muted);
+  font-size: 0.86rem;
+}
+.site-footer .wrap { padding: 1.5rem 1.25rem; }
+
+@media (max-width: 640px) {
+  h1 { font-size: 1.5rem; }
+  .wrap { padding: 1.5rem 1rem 3rem; }
+}

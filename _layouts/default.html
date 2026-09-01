@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} &middot; {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='14'>&#9638;</text></svg>">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <p class="site-tagline">{{ site.course.code }} &middot; {{ site.tagline }}</p>
+  </div>
+  <nav class="site-nav">
+    {% assign nav = "/,Home|/schedule/,Schedule|/assignments/,Assignments|/resources/,Resources" | split: "|" %}
+    {% for item in nav %}
+      {% assign bits = item | split: "," %}
+      {% assign href = bits[0] %}
+      <a href="{{ href | relative_url }}"
+         class="{% if page.url == href %}is-active{% elsif href != '/' and page.url contains href %}is-active{% endif %}">{{ bits[1] }}</a>
+    {% endfor %}
+  </nav>
+</header>
+
+<main class="wrap">
+  {{ content }}
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>
+      <strong>{{ site.title }}</strong> ({{ site.course.code }}) &middot;
+      {{ site.course.format }} &middot; {{ site.course.hours }} contact hours.
+    </p>
+    <p>
+      Built on Golub &amp; Van Loan, <em>Matrix Computations</em>, 4th edition.
+      Site source on GitHub &middot; corrections welcome by pull request.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

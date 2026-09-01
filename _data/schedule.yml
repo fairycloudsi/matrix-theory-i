@@ -1,0 +1,329 @@
+# ---------------------------------------------------------------------------
+# Single source of truth for the 16-week schedule.
+#
+# The schedule table and every week page are generated from this file, so they
+# cannot drift apart. To post slides or notes, just fill in the `slides:` and
+# `notes:` keys below with a path under /assets/ -- the week page picks them up
+# automatically and the placeholder disappears.
+#
+# Section and page numbers refer to Golub & Van Loan, Matrix Computations,
+# 4th edition (Johns Hopkins University Press, 2013).
+# ---------------------------------------------------------------------------
+
+- week: 1
+  slug: "01"
+  part: "Foundations"
+  theme: "Cost"
+  topic: "Matrix multiplication as computation"
+  gvl: "&sect;1.1&ndash;1.3"
+  pages: "2&ndash;33"
+  objectives:
+    - "Express a matrix product in dot-product, saxpy, and outer-product form, and say which is which from the loop nesting."
+    - "Count flops for the basic kernels and classify an operation as BLAS level 1, 2, or 3."
+    - "Explain why two loop orderings with identical arithmetic can differ by an order of magnitude in runtime."
+  algorithms:
+    - "The six loop orderings of matrix multiplication"
+    - "Blocked matrix multiplication"
+    - "Strassen's algorithm"
+  ai: >-
+    Arithmetic intensity is why every GPU kernel behind a neural network is
+    restructured into blocked, level-3 operations. Understanding the memory
+    hierarchy explains far more about training throughput than flop counts do.
+
+- week: 2
+  slug: "02"
+  part: "Foundations"
+  theme: "Language"
+  topic: "Vector spaces, norms, and orthogonality"
+  gvl: "&sect;2.1&ndash;2.3"
+  pages: "64&ndash;76"
+  objectives:
+    - "Identify the four fundamental subspaces of a matrix and their dimensions."
+    - "Compute and compare vector norms, induced matrix norms, and the Frobenius norm."
+    - "Use submultiplicativity and norm equivalence in a bound."
+  algorithms:
+    - "Orthogonal projection onto a subspace"
+    - "Gram matrices and orthonormal bases"
+  ai: >-
+    Matrix norms give the Lipschitz constants of network layers, which is the
+    basis of spectral normalization and most generalization bounds.
+
+- week: 3
+  slug: "03"
+  part: "Foundations"
+  theme: "Structure"
+  topic: "The singular value decomposition"
+  gvl: "&sect;2.4&ndash;2.5"
+  pages: "76&ndash;87"
+  flag: "Key week"
+  objectives:
+    - "State the SVD theorem and read rank, range, and null space off the factors."
+    - "Compute the distance from a matrix to the nearest rank-deficient matrix."
+    - "Use principal angles to measure the distance between two subspaces."
+  algorithms:
+    - "The SVD as an analytical tool (computation comes in Week 14)"
+    - "Numerical rank determination"
+  ai: >-
+    PCA is an SVD of centred data. Numerical rank tells you how much of a weight
+    matrix is actually being used, which is the premise behind low-rank
+    adaptation (LoRA) and model compression.
+
+- week: 4
+  slug: "04"
+  part: "Foundations"
+  theme: "Conditioning"
+  topic: "Sensitivity and finite precision"
+  gvl: "&sect;2.6&ndash;2.7"
+  pages: "87&ndash;105"
+  objectives:
+    - "Define the condition number and use it to bound the error in a computed solution."
+    - "Distinguish forward error, backward error, and residual, and explain why a small residual is not enough."
+    - "Apply the floating-point model to a simple computation."
+  algorithms:
+    - "Condition number estimation"
+    - "Backward error analysis of a basic kernel"
+  ai: >-
+    An ill-conditioned Hessian is exactly why gradient descent crawls in some
+    directions. Conditioning also explains when float32 training is safe and
+    when it silently is not.
+  due: "Assignment 1 &mdash; norms and conditioning"
+
+- week: 5
+  slug: "05"
+  part: "Linear systems"
+  theme: "Solve"
+  topic: "Triangular systems and the LU factorization"
+  gvl: "&sect;3.1&ndash;3.2"
+  pages: "106&ndash;122"
+  objectives:
+    - "Implement forward and back substitution and state their cost."
+    - "Derive Gaussian elimination as a factorization A = LU."
+    - "State when the LU factorization exists without pivoting."
+  algorithms:
+    - "Forward and back substitution"
+    - "Gaussian elimination / LU factorization"
+  ai: >-
+    The factor-once-solve-many pattern: whenever the same operator is reused
+    across many right-hand sides, the factorization is amortized.
+
+- week: 6
+  slug: "06"
+  part: "Linear systems"
+  theme: "Stability"
+  topic: "Roundoff, pivoting, and accuracy"
+  gvl: "&sect;3.3&ndash;3.5"
+  pages: "122&ndash;144"
+  objectives:
+    - "Explain the role of the growth factor in the stability of Gaussian elimination."
+    - "Contrast partial and complete pivoting."
+    - "Improve a computed solution by iterative refinement."
+  algorithms:
+    - "Gaussian elimination with partial pivoting"
+    - "Iterative refinement"
+    - "Condition estimation"
+  ai: >-
+    Every library solver pivots. Knowing what breaks without it is the
+    difference between trusting a result and merely obtaining one.
+
+- week: 7
+  slug: "07"
+  part: "Linear systems"
+  theme: "Exploit structure"
+  topic: "Positive definite and banded systems"
+  gvl: "&sect;4.1&ndash;4.3"
+  pages: "154&ndash;186"
+  objectives:
+    - "Test for and exploit diagonal dominance and symmetry."
+    - "Derive the Cholesky factorization and explain why it needs no pivoting."
+    - "Store and solve a banded system in O(n) work per bandwidth."
+  algorithms:
+    - "Cholesky factorization A = LL^T"
+    - "Banded LU and banded Cholesky"
+  ai: >-
+    Covariance and kernel matrices are symmetric positive definite. Cholesky is
+    the workhorse of Gaussian process regression and of sampling from a
+    multivariate normal.
+  due: "Assignment 2 &mdash; LU and Cholesky"
+
+- week: 8
+  slug: "08"
+  part: "Linear systems"
+  theme: "Exploit structure"
+  topic: "Structured and fast solvers"
+  gvl: "&sect;4.5, 4.7&ndash;4.8"
+  pages: "196&ndash;233"
+  flag: "Midterm"
+  objectives:
+    - "Solve a block tridiagonal system by block elimination."
+    - "Recognise Toeplitz and circulant structure and exploit it."
+    - "Diagonalize a circulant matrix with the DFT and solve in O(n log n)."
+  algorithms:
+    - "Block tridiagonal elimination"
+    - "Classical Toeplitz methods"
+    - "FFT-based circulant and discrete Poisson solvers"
+  ai: >-
+    A convolution is a circulant matrix. The same structure that makes
+    convolution cheap in a CNN makes these systems fast to solve.
+  due: "Midterm examination"
+
+- week: 9
+  slug: "09"
+  part: "Least squares"
+  theme: "Orthogonality"
+  topic: "Householder, Givens, and the QR factorization"
+  gvl: "&sect;5.1&ndash;5.2"
+  pages: "234&ndash;260"
+  objectives:
+    - "Construct Householder reflections and Givens rotations and apply them stably."
+    - "Compute a QR factorization by Householder triangularization."
+    - "Explain why classical Gram-Schmidt loses orthogonality and what to do instead."
+  algorithms:
+    - "Householder QR"
+    - "Givens rotations"
+    - "Modified Gram-Schmidt"
+  ai: >-
+    Orthogonal parameterizations keep recurrent and deep networks from
+    exploding or vanishing; QR is how an orthonormal basis is built safely.
+
+- week: 10
+  slug: "10"
+  part: "Least squares"
+  theme: "Fit"
+  topic: "The full-rank least squares problem"
+  gvl: "&sect;5.3&ndash;5.4"
+  pages: "260&ndash;288"
+  objectives:
+    - "Derive the normal equations and state their conditioning drawback."
+    - "Solve a least squares problem by QR and by SVD, and choose between them."
+    - "Use a complete orthogonal decomposition."
+  algorithms:
+    - "Least squares via normal equations, QR, and SVD"
+    - "Complete orthogonal decomposition"
+  ai: >-
+    Linear regression, done correctly. Every fitting procedure in machine
+    learning descends from this problem.
+  due: "Assignment 3 &mdash; QR and least squares"
+
+- week: 11
+  slug: "11"
+  part: "Least squares"
+  theme: "Regularize"
+  topic: "Rank deficiency, regularization, and total least squares"
+  gvl: "&sect;5.5, 6.1, 6.3"
+  pages: "288&ndash;327"
+  objectives:
+    - "Characterise the minimum-norm solution of a rank-deficient problem via the pseudoinverse."
+    - "Formulate Tikhonov regularization and interpret the regularization parameter."
+    - "Set up a total least squares problem and say when it is the right model."
+  algorithms:
+    - "Truncated SVD and the Moore-Penrose pseudoinverse"
+    - "Tikhonov regularization"
+    - "Total least squares via the SVD"
+  ai: >-
+    Ridge regression <em>is</em> Tikhonov regularization, and weight decay is
+    the same idea once more. Total least squares is the right model whenever
+    the inputs are noisy too.
+
+- week: 12
+  slug: "12"
+  part: "Eigenvalues"
+  theme: "Diagonalize"
+  topic: "Eigenvalue theory and perturbation"
+  gvl: "&sect;7.1&ndash;7.2"
+  pages: "348&ndash;365"
+  objectives:
+    - "Use similarity transformations and state the Schur decomposition."
+    - "Decide when a matrix is diagonalizable and what to do when it is not."
+    - "Bound eigenvalue perturbations with the Bauer-Fike theorem."
+  algorithms:
+    - "Schur decomposition"
+    - "Eigenvalue condition numbers"
+  ai: >-
+    The spectral radius governs whether an iterated map converges or diverges.
+    Nonsymmetric spectra can be extremely sensitive, which matters for
+    recurrent dynamics.
+
+- week: 13
+  slug: "13"
+  part: "Eigenvalues"
+  theme: "Diagonalize"
+  topic: "Power iterations and the QR algorithm"
+  gvl: "&sect;7.3&ndash;7.5"
+  pages: "365&ndash;394"
+  objectives:
+    - "Implement power, inverse, and shifted inverse iteration, and predict their convergence rates."
+    - "Reduce a matrix to Hessenberg form and explain why that is the right preprocessing step."
+    - "Describe the shifted QR iteration and where its cubic convergence comes from."
+  algorithms:
+    - "Power, inverse, and Rayleigh quotient iteration"
+    - "Hessenberg reduction"
+    - "The practical shifted QR algorithm"
+  ai: >-
+    PageRank is a power iteration on a stochastic matrix. Dominant-eigenvector
+    methods appear throughout graph learning and ranking.
+  due: "Assignment 4 &mdash; eigenvalues"
+
+- week: 14
+  slug: "14"
+  part: "Eigenvalues"
+  theme: "Diagonalize"
+  topic: "Symmetric eigenproblems and computing the SVD"
+  gvl: "&sect;8.1&ndash;8.3, 8.6"
+  pages: "440&ndash;467, 486&ndash;497"
+  flag: "Closes the loop from Week 3"
+  objectives:
+    - "State the spectral theorem and the min-max characterisation of eigenvalues."
+    - "Apply the symmetric QR algorithm to a tridiagonal matrix."
+    - "Describe Golub-Kahan bidiagonalization and how the SVD is actually computed."
+  algorithms:
+    - "Tridiagonalization and the symmetric QR algorithm"
+    - "Rayleigh quotient iteration"
+    - "Golub-Kahan bidiagonalization for the SVD"
+  ai: >-
+    Spectral clustering and Laplacian eigenmaps are symmetric eigenproblems.
+    The Hessian spectrum is how the loss landscape of a network is studied.
+
+- week: 15
+  slug: "15"
+  part: "Large scale"
+  theme: "Scale up"
+  topic: "Sparse systems, conjugate gradient, and preconditioning"
+  gvl: "&sect;11.1&ndash;11.3, 11.5, 10.1"
+  pages: "598&ndash;639, 650&ndash;670, 546&ndash;556"
+  objectives:
+    - "Work with a matrix available only as the operator x &rarr; Ax."
+    - "Derive the conjugate gradient method and its convergence rate in terms of the condition number."
+    - "Explain what a preconditioner does to the spectrum and why that is the whole game."
+  algorithms:
+    - "Jacobi, Gauss-Seidel, and SOR"
+    - "The conjugate gradient method"
+    - "Preconditioned CG; the symmetric Lanczos process"
+  ai: >-
+    Hessian-free (Newton-CG) optimization never forms the Hessian, only
+    Hessian-vector products. The same matrix-free idea underlies large-scale
+    kernel methods and PDE-constrained learning.
+  due: "Assignment 5 &mdash; sparse and iterative methods"
+
+- week: 16
+  slug: "16"
+  part: "Synthesis"
+  theme: "Differentiate"
+  topic: "Matrix calculus, backpropagation, and synthesis"
+  gvl: "&sect;12.3"
+  pages: "707&ndash;719"
+  extra: >-
+    Supplemented by Deisenroth, Faisal &amp; Ong, <em>Mathematics for Machine
+    Learning</em>, Chapter 5 &mdash; Golub &amp; Van Loan has no matrix-calculus
+    chapter.
+  objectives:
+    - "Use Kronecker products and the vec operator to rewrite matrix equations as linear systems."
+    - "Differentiate matrix-valued expressions using differentials rather than index gymnastics."
+    - "Explain backpropagation as a sequence of Jacobian-transpose products."
+  algorithms:
+    - "Kronecker product and vec identities"
+    - "Reverse-mode automatic differentiation"
+  ai: >-
+    This is where the course meets deep learning head on. Backpropagation is
+    not a special trick: it is reverse-mode differentiation, and seeing it that
+    way makes second-order and natural-gradient methods comprehensible.
+  due: "Course project presentations"
