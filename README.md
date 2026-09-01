@@ -11,16 +11,18 @@ Live site: `https://<your-username>.github.io/matrix-theory-i/`
 
 Three steps, no build system and no CI required — GitHub Pages builds Jekyll natively.
 
-1. **Create the repository** and push this directory to it:
+1. **Push it.** This directory is *already* a git repository with one commit on
+   `main` — you do not need `git init`. Create an empty repository on GitHub
+   (no README, no .gitignore, no licence), then:
 
    ```bash
-   git init
-   git add .
-   git commit -m "Course website"
-   git branch -M main
    git remote add origin https://github.com/<your-username>/matrix-theory-i.git
    git push -u origin main
    ```
+
+   If `git push` asks for a password, GitHub no longer accepts one. Use a
+   Personal Access Token as the password, or install GitHub Desktop / the `gh`
+   CLI, which handle sign-in for you.
 
 2. **Turn on Pages.** Repository → *Settings* → *Pages* → **Source: Deploy from a branch**,
    branch `main`, folder `/ (root)`. The first build takes a minute or two.
