@@ -15,7 +15,7 @@ description: >-
   Graduate course on matrix theory and matrix computations for students in
   artificial intelligence and related disciplines. 16 weeks, 32 contact hours.
 
-baseurl: "/matrix-theory-i"
+baseurl: "/YOUR-REPO-NAME"
 url: ""
 
 # --- Course facts, surfaced across the site -------------------------------
@@ -24,9 +24,9 @@ course:
   hours: 32
   weeks: 16
   format: "16 weeks x 2 hours"
-  instructor: "TBA"
-  email: "tba@example.edu"
-  meeting: "TBA"
+  instructor: "Huiwen Wu"
+  email: "huiwenw@buaa.edu.cn"
+  meeting: "Tuesday Week2-Week17"
   location: "TBA"
   office_hours: "TBA"
 
