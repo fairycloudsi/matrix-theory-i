@@ -51,7 +51,14 @@ layout: default
       {% if wk.notes %}<a href="{{ wk.notes | relative_url }}">Lecture notes</a>
       {% else %}<span class="pending">posted after class</span>{% endif %}</li>
     <li><strong>Code</strong><br>
-      {% if wk.code %}<a href="{{ wk.code }}">Repository folder</a>
+      {%- comment -%}
+        `code:` accepts either an external URL (a GitHub folder, say) or a path
+        inside this site. A site path must go through relative_url or it breaks
+        under baseurl -- link text is then the filename.
+      {%- endcomment -%}
+      {% if wk.code %}
+        {% if wk.code contains "://" %}<a href="{{ wk.code }}">Code for this week</a>
+        {% else %}<a href="{{ wk.code | relative_url }}">{{ wk.code | split: "/" | last }}</a>{% endif %}
       {% else %}<span class="pending">to be added</span>{% endif %}</li>
     <li><strong>Due this week</strong><br>
       {% if wk.due %}{{ wk.due }}{% else %}<span class="pending">nothing due</span>{% endif %}</li>
