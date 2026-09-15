@@ -17,6 +17,7 @@
   topic: "Matrix multiplication as computation"
   gvl: "&sect;1.1&ndash;1.3"
   pages: "2&ndash;33"
+  slides: "/assets/slides/lecture_1.pdf"
   objectives:
     - "Express a matrix product in dot-product, saxpy, and outer-product form, and say which is which from the loop nesting."
     - "Count flops for the basic kernels and classify an operation as BLAS level 1, 2, or 3."
