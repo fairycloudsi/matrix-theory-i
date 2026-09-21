@@ -17,8 +17,9 @@
   topic: "Matrix multiplication as computation"
   gvl: "&sect;1.1&ndash;1.3"
   pages: "2&ndash;33"
-  slides: "/assets/slides/lecture_1.pdf"
+  slides: "/assets/slides/Week1_slides.pdf"
   code: "/assets/codes/lecture1_computation_checks.py"
+  notes: "/assets/notes/week1_Lecture_Notes.pdf"
   objectives:
     - "Express a matrix product in dot-product, saxpy, and outer-product form, and say which is which from the loop nesting."
     - "Count flops for the basic kernels and classify an operation as BLAS level 1, 2, or 3."
@@ -35,10 +36,36 @@
 - week: 2
   slug: "02"
   part: "Foundations"
+  theme: "Cost"
+  topic: "Matrix multiplication as computation"
+  gvl: "&sect;1.1&ndash;1.3"
+  pages: "2&ndash;33"
+  slides: "/assets/slides/Week1_slides.pdf"
+  code: "/assets/codes/lecture1_computation_checks.py"
+  notes: "/assets/notes/week1_Lecture_Notes.pdf"
+  objectives:
+    - "Express a matrix product in dot-product, saxpy, and outer-product form, and say which is which from the loop nesting."
+    - "Count flops for the basic kernels and classify an operation as BLAS level 1, 2, or 3."
+    - "Explain why two loop orderings with identical arithmetic can differ by an order of magnitude in runtime."
+  algorithms:
+    - "The six loop orderings of matrix multiplication"
+    - "Blocked matrix multiplication"
+    - "Strassen's algorithm"
+  ai: >-
+    Arithmetic intensity is why every GPU kernel behind a neural network is
+    restructured into blocked, level-3 operations. Understanding the memory
+    hierarchy explains far more about training throughput than flop counts do.
+
+
+- week: 3
+  slug: "03"
+  part: "Foundations"
   theme: "Language"
   topic: "Vector spaces, norms, and orthogonality"
   gvl: "&sect;2.1&ndash;2.3"
   pages: "64&ndash;76"
+  slides: "/assets/slides/Week3_slides.pdf"
+  notes: "/assets/notes/week3_Lecture_Notes.pdf"
   objectives:
     - "Identify the four fundamental subspaces of a matrix and their dimensions."
     - "Compute and compare vector norms, induced matrix norms, and the Frobenius norm."
@@ -50,8 +77,8 @@
     Matrix norms give the Lipschitz constants of network layers, which is the
     basis of spectral normalization and most generalization bounds.
 
-- week: 3
-  slug: "03"
+- week: 4
+  slug: "04"
   part: "Foundations"
   theme: "Structure"
   topic: "The singular value decomposition"
@@ -70,8 +97,8 @@
     matrix is actually being used, which is the premise behind low-rank
     adaptation (LoRA) and model compression.
 
-- week: 4
-  slug: "04"
+- week: 5
+  slug: "05"
   part: "Foundations"
   theme: "Conditioning"
   topic: "Sensitivity and finite precision"
@@ -90,8 +117,8 @@
     when it silently is not.
   due: "Assignment 1 &mdash; norms and conditioning"
 
-- week: 5
-  slug: "05"
+- week: 6
+  slug: "06"
   part: "Linear systems"
   theme: "Solve"
   topic: "Triangular systems and the LU factorization"
@@ -108,8 +135,8 @@
     The factor-once-solve-many pattern: whenever the same operator is reused
     across many right-hand sides, the factorization is amortized.
 
-- week: 6
-  slug: "06"
+- week: 7
+  slug: "07"
   part: "Linear systems"
   theme: "Stability"
   topic: "Roundoff, pivoting, and accuracy"
@@ -127,8 +154,8 @@
     Every library solver pivots. Knowing what breaks without it is the
     difference between trusting a result and merely obtaining one.
 
-- week: 7
-  slug: "07"
+- week: 8
+  slug: "08"
   part: "Linear systems"
   theme: "Exploit structure"
   topic: "Positive definite and banded systems"
@@ -147,8 +174,8 @@
     multivariate normal.
   due: "Assignment 2 &mdash; LU and Cholesky"
 
-- week: 8
-  slug: "08"
+- week: 9
+  slug: "09"
   part: "Linear systems"
   theme: "Exploit structure"
   topic: "Structured and fast solvers"
@@ -168,8 +195,8 @@
     convolution cheap in a CNN makes these systems fast to solve.
   due: "Midterm examination"
 
-- week: 9
-  slug: "09"
+- week: 10
+  slug: "10"
   part: "Least squares"
   theme: "Orthogonality"
   topic: "Householder, Givens, and the QR factorization"
@@ -187,8 +214,8 @@
     Orthogonal parameterizations keep recurrent and deep networks from
     exploding or vanishing; QR is how an orthonormal basis is built safely.
 
-- week: 10
-  slug: "10"
+- week: 11
+  slug: "11"
   part: "Least squares"
   theme: "Fit"
   topic: "The full-rank least squares problem"
@@ -206,8 +233,8 @@
     learning descends from this problem.
   due: "Assignment 3 &mdash; QR and least squares"
 
-- week: 11
-  slug: "11"
+- week: 12
+  slug: "12"
   part: "Least squares"
   theme: "Regularize"
   topic: "Rank deficiency, regularization, and total least squares"
@@ -226,8 +253,8 @@
     the same idea once more. Total least squares is the right model whenever
     the inputs are noisy too.
 
-- week: 12
-  slug: "12"
+- week: 13
+  slug: "13"
   part: "Eigenvalues"
   theme: "Diagonalize"
   topic: "Eigenvalue theory and perturbation"
@@ -245,8 +272,8 @@
     Nonsymmetric spectra can be extremely sensitive, which matters for
     recurrent dynamics.
 
-- week: 13
-  slug: "13"
+- week: 14
+  slug: "14"
   part: "Eigenvalues"
   theme: "Diagonalize"
   topic: "Power iterations and the QR algorithm"
@@ -265,8 +292,8 @@
     methods appear throughout graph learning and ranking.
   due: "Assignment 4 &mdash; eigenvalues"
 
-- week: 14
-  slug: "14"
+- week: 15
+  slug: "15"
   part: "Eigenvalues"
   theme: "Diagonalize"
   topic: "Symmetric eigenproblems and computing the SVD"
@@ -285,8 +312,8 @@
     Spectral clustering and Laplacian eigenmaps are symmetric eigenproblems.
     The Hessian spectrum is how the loss landscape of a network is studied.
 
-- week: 15
-  slug: "15"
+- week: 16
+  slug: "16"
   part: "Large scale"
   theme: "Scale up"
   topic: "Sparse systems, conjugate gradient, and preconditioning"
@@ -306,8 +333,8 @@
     kernel methods and PDE-constrained learning.
   due: "Assignment 5 &mdash; sparse and iterative methods"
 
-- week: 16
-  slug: "16"
+- week: 17
+  slug: "17"
   part: "Synthesis"
   theme: "Differentiate"
   topic: "Matrix calculus, backpropagation, and synthesis"
