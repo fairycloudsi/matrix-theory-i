@@ -6,7 +6,6 @@ title: Matrix Theory and Applications I
 <div class="hero" markdown="1">
 The matrix is the data structure of modern AI. This course is about understanding it,
 computing with it, and — the part that is usually skipped — computing with it *reliably*.
-
 Sixteen weeks built on **Golub & Van Loan, _Matrix Computations_, 4th edition**, with every
 week tied to specific sections of the book and to a problem you will meet in machine learning,
 vision, or scientific computing.
@@ -32,6 +31,23 @@ vision, or scientific computing.
     <strong>Resources</strong>
     <span>Textbooks, the author's own code and errata, and software setup.</span></a></li>
 </ul>
+
+
+## Course group
+
+<figure class="qr">
+  <img src="{{ '/assets/img/course-group-qr.png' | relative_url }}"
+       alt="DingTalk QR code for joining the Matrix Theory course group"
+       width="620" height="839">
+  <figcaption>
+    Scan with <strong>DingTalk</strong> (钉钉) to join
+    <strong>Matrix-theory-compute-course-group</strong> — announcements, questions,
+    and slide corrections. The group is internal to 北京航空航天大学国际创新研究院:
+    members of the institute can join directly.
+  </figcaption>
+</figure>
+
+
 
 ## What you will be able to do
 

@@ -325,6 +325,28 @@ td.num, th.num { text-align: right; white-space: nowrap; }
   border-top: 1px solid var(--rule);
   font-size: 0.92rem;
 }
+/* --- Course group QR ------------------------------------------------------ */
+
+.qr {
+  margin: 1.2rem 0 1.8rem;
+  max-width: 320px;
+}
+
+.qr img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+
+.qr figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--fg-muted);
+}
+
 
 /* --- Footer --------------------------------------------------------------- */
 
